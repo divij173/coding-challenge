@@ -12,6 +12,7 @@ function metricsCalculations(fileData) {
     let expenses = 0;
     let grossProfit = 0;
     let assets = 0;
+    let liabilities = 0;
 
     for (let i = 0; i < fileData.data.length; i++) {
         const rowData = fileData.data[i];
@@ -46,16 +47,29 @@ function metricsCalculations(fileData) {
                 assets -= rowData.total_value; 
             }
         }
+
+        // Liabilities Calculation
+        if (rowData.account_category === "liability" && (rowData.account_type === "current" || rowData.account_type === "current_accounts_payable")) {
+            if (rowData.value_type ==="credit") {
+                liabilities += rowData.total_value; 
+            }
+            else if (rowData.value_type ==="debit") {
+                liabilities -= rowData.total_value; 
+            }
+        }
     }
 
     const grossProfitMargin = revenue !==0 ? grossProfit/revenue : 0;
     const netProfitMargin = revenue !==0 ? ((revenue - expenses)/ revenue) : 0;
+    const workingCapitalRatio = liabilities !==0 ? assets/liabilities : 0;
 
     return {"Revenue": revenue,
             "Expense": expenses,
             "GrossProfitMargin": grossProfitMargin,
             "NetProfitMargin": netProfitMargin,
-            "Assets": assets
+            "Assets": assets,
+            "Liabilities": liabilities,
+            "WorkingCapitalRatio": workingCapitalRatio
     };
 };
 
