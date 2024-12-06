@@ -11,7 +11,6 @@ function metricsCalculations(fileData) {
     let revenue = 0;
     let expenses = 0;
     let grossProfit = 0;
-    let grossProfitMargin = 0;
 
     for (let i = 0; i < fileData.data.length; i++) {
         const rowData = fileData.data[i];
@@ -30,12 +29,20 @@ function metricsCalculations(fileData) {
         if (rowData.account_type === "sales" && rowData.value_type === "debit") {
             grossProfit += rowData.total_value;
         }
-    } 
-    grossProfitMargin = revenue !==0 ? grossProfit/revenue : 0;
+
+        // Net Profit Margin Calculation
+        if (rowData.account_type === "sales" && rowData.value_type === "debit") {
+            grossProfit += rowData.total_value;
+        }
+    }
+
+    const grossProfitMargin = revenue !==0 ? grossProfit/revenue : 0;
+    const netProfitMargin = revenue !==0 ? ((revenue - expenses)/ revenue) : 0;
 
     return {"Revenue": revenue,
             "Expense": expenses,
             "GrossProfitMargin": grossProfitMargin,
+            "NetProfitMargin": netProfitMargin
     };
 };
 
