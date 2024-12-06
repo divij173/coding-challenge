@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/divij173/coding-challenge/issues"
   },
-  "homepage": "https://github.com/divij173/coding-challenge#readme"
+  "homepage": "https://github.com/divij173/coding-challenge#readme",
+  "dependencies": {
+    "jest": "^29.7.0"
+  }
 }
