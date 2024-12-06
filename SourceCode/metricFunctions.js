@@ -63,14 +63,7 @@ function metricsCalculations(fileData) {
     const netProfitMargin = revenue !==0 ? ((revenue - expenses)/ revenue) : 0;
     const workingCapitalRatio = liabilities !==0 ? assets/liabilities : 0;
 
-    return {"Revenue": revenue,
-            "Expense": expenses,
-            "GrossProfitMargin": grossProfitMargin,
-            "NetProfitMargin": netProfitMargin,
-            "Assets": assets,
-            "Liabilities": liabilities,
-            "WorkingCapitalRatio": workingCapitalRatio
-    };
+    return {revenue, expenses, grossProfitMargin, netProfitMargin, workingCapitalRatio};
 };
 
 

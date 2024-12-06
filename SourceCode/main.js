@@ -1,7 +1,10 @@
 const {readFileDir, metricsCalculations} = require("./metricFunctions");
 
-const data = readFileDir("../data.json");
-const output = metricsCalculations(data);
+try {
+    const data = readFileDir("../data.json");
+    const output = metricsCalculations(data);
 
-
-console.log(output);
+    console.log(output);
+} catch (e) {
+    console.error("Error occurred processing the given data: ", e.message);
+}
