@@ -11,6 +11,7 @@ function metricsCalculations(fileData) {
     let revenue = 0;
     let expenses = 0;
     let grossProfit = 0;
+    let assets = 0;
 
     for (let i = 0; i < fileData.data.length; i++) {
         const rowData = fileData.data[i];
@@ -34,6 +35,17 @@ function metricsCalculations(fileData) {
         if (rowData.account_type === "sales" && rowData.value_type === "debit") {
             grossProfit += rowData.total_value;
         }
+
+        // Working Capital Ratio Calculation
+        // Assets Calculation
+        if (rowData.account_category === "assets" && (rowData.account_type === "current" || rowData.account_type === "bank" || rowData.account_type === "current_accounts_receivable")) {
+            if (rowData.value_type ==="debit") {
+                assets += rowData.total_value; 
+            }
+            else if (rowData.value_type ==="credit") {
+                assets -= rowData.total_value; 
+            }
+        }
     }
 
     const grossProfitMargin = revenue !==0 ? grossProfit/revenue : 0;
@@ -42,7 +54,8 @@ function metricsCalculations(fileData) {
     return {"Revenue": revenue,
             "Expense": expenses,
             "GrossProfitMargin": grossProfitMargin,
-            "NetProfitMargin": netProfitMargin
+            "NetProfitMargin": netProfitMargin,
+            "Assets": assets
     };
 };
 
