@@ -59,9 +59,9 @@ function metricsCalculations(fileData) {
         }
     }
 
-    const grossProfitMargin = revenue !==0 ? grossProfit/revenue : 0;
-    const netProfitMargin = revenue !==0 ? ((revenue - expenses)/ revenue) : 0;
-    const workingCapitalRatio = liabilities !==0 ? assets/liabilities : 0;
+    const grossProfitMargin = revenue !==0 ? ((grossProfit/revenue)*100) : 0;
+    const netProfitMargin = revenue !==0 ? (((revenue - expenses)/ revenue)*100) : 0;
+    const workingCapitalRatio = liabilities !==0 ? ((assets/liabilities)*100) : 0;
 
     return {revenue, expenses, grossProfitMargin, netProfitMargin, workingCapitalRatio};
 };
