@@ -7,4 +7,18 @@ function readFileDir(fileDir) {
 
 }
 
-module.exports = {readFileDir};
+function metricsCalculations(fileData) {
+    let revenue = 0;
+
+    for (let i = 0; i < fileData.data.length; i++) {
+        const rowData = fileData.data[i];
+        
+        if (rowData.account_category === "revenue") {
+            revenue += rowData.total_value;
+        } 
+    } 
+
+    return revenue;
+}
+
+module.exports = {readFileDir, metricsCalculations};

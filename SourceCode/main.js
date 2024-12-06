@@ -1,5 +1,7 @@
-const {readFileDir} = require("./metricFunctions");
+const {readFileDir, metricsCalculations} = require("./metricFunctions");
 
 const data = readFileDir("../data.json");
+const output = metricsCalculations(data);
 
-console.log(data);
+
+console.log(output);
