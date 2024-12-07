@@ -1,95 +1,137 @@
-# RewardPay Coding Challenge
+Here's a comprehensive `README.md` file for your project: 
 
-## Overview
+---
 
-This repo contains the instructions and the data you need to complete the _RewardPay coding challenge_.  This challenge is not intended to be complex, but it is an opportunity for you to showcase your understanding and applying of good development practices.
+# RewardPay Accounting Metrics Challenge
 
-You are encouraged to treat this as a real-life project.  This typically means:
+This repository contains the solution to the RewardPay coding challenge. The challenge involves developing an application that calculates key accounting metrics from a given JSON data file and outputs them in a specific format.
 
-- Use version control effectively
-- Include some basic documentation
-- Include some unit tests
-- Adhere to a naming convention
+## Project Overview
 
-Please use JavaScript of TypeScript to complete this challenge.
+The application performs the following tasks:
+1. Reads and parses an external data file (`data.json`).
+2. Calculates the following accounting metrics:
+   - **Revenue**
+   - **Expenses**
+   - **Gross Profit Margin**
+   - **Net Profit Margin**
+   - **Working Capital Ratio**
+3. Outputs the calculated metrics in a user-friendly format.
 
-## The Challenge
+This project demonstrates good development practices, including unit testing, proper formatting, and modular code structure.
 
-You are tasked with developing an application that performs the following tasks in sequence:
+---
 
-- Read and parse an external data file `data.json` (located in this repo)
-- Using this data, calculate and print the values of 5 common accounting metrics:
-  1. Revenue
-  2. Expenses
-  3. Gross Profit Margin
-  4. Net Profit Margin
-  5. Working Capital Ratio
-- Commit your changes, and upload all your work to a feature branch of your choice.
+## Features
 
-## Instructions
+- Reads and processes structured financial data from `data.json`.
+- Accurately computes metrics using the specified formulas.
+- Formats output according to the requirements:
+  - Monetary values are prefixed with `$`, include commas for thousands, and omit decimal points.
+  - Percentages are formatted with one decimal place and prefixed with `%`.
+- Includes robust unit tests to validate functionality and handle edge cases.
 
-- Begin by _forking_ the current repository to your own `github.com` account
-- Clone the repo locally
-- Write your code, _commit often_
-- Once you are satisfied with the output, push your changes to your `github.com` account
-- Share the link
+---
 
-## Calculations
+## Getting Started
 
-Use the formulas below to calculate your values:
+Follow these instructions to set up, run, and test the application.
 
-### Revenue
+### Prerequisites
 
-This should be calculated by adding up all the values under `total_value` where the `account_category` field is set to `revenue`
+Ensure you have the following installed on your system:
+- **Node.js** (v14.x or later)
+- **npm** (Node Package Manager, comes with Node.js)
 
-### Expenses
+### Installation
 
-This should be calculated by adding up all the values under `total_value` where the `account_category` field is set to `expense`
+1. Clone this repository:
+   ```bash
+   git clone <repo_url>
+   cd rewardpay-challenge
+   ```
 
-### Gross Profit Margin
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-This is calculated in two steps: first by adding all the `total_value` fields where the `account_type` is set to `sales` and the `value_type` is set to `debit`; then dividing that by the `revenue` value calculated earlier to generate a percentage value.
+---
 
-### Net Profit Margin
+## Usage
 
-This metric is calculated by subtracting the `expenses` value from the `revenue` value and dividing the remainder by `revenue` to calculate a percentage.
+To run the application and calculate metrics:
 
-### Working Capital Ratio
+1. Ensure `data.json` is located in the root folder (or modify the path in `readFileDir` accordingly).
+2. Execute the application:
+   ```bash
+   node SourceCode/main.js
+   ```
 
-This is calculated dividing the `assets` by the `liabilities` creating a percentage value where `assets` are calculated by:
-
-- adding the `total_value` from all records where the `account_category` is set to `assets`, the `value_type` is set to `debit`, and the `account_type` is one of `current`, `bank`, or `current_accounts_receivable`
-- subtracting the `total_value` from all records where the `account_category` is set to `assets`, the `value_type` is set to `credit`, and the `account_type` is one of `current`, `bank`, or `current_accounts_receivable`
-
-and liabilities are calculated by:
-
-- adding the `total_value` from all records where the `account_category` is set to `liability`, the `value_type` is set to `credit`, and the `account_type` is one of `current` or `current_accounts_payable`
-- subtracting the `total_value` from all records where the `account_category` is set to `liability`, the `value_type` is set to `debit`, and the `account_type` is one `current` or `current_accounts_payable`
-
-## Formatting
-
-All currency figures must be formatted as follows:
-- The value is prefixed with a `$` sign
-- A comma is used to separate every 3 digits in the thousands, millions, billions, and trillions
-- Cents are removed
-
-All percentage values must be formatted to one decimal digit and be prefixed with a `%` sign.  Don't forget to multiply by 100 each time you're tasked with calculating a percentage value.
-
-## Example
-
-Below is what a typical output should look like.  Please note this is *not* the output of the challenge but a mere example.
-
-```
-$ ./myChallenge
-Revenue: $519,169
-Expenses: $411,664
-Gross Profit Margin: 22%
-Net Profit Margin: 21%
-Working Capital Ratio: 95%
+### Example Output
+```bash
+Revenue: $32,431
+Expenses: $36,530
+Gross Profit Margin: 0.0%
+Net Profit Margin: -12.6%
+Working Capital Ratio: 118.8%
 ```
 
-# Dependencies
+---
 
-If your program requires a special way to compile or a specific version of a toolset, please be sure to include that in your running instructions.
+## Running Tests
 
-__Thank you and good luck!__
+This project includes unit tests for all major functionalities to ensure correctness and robustness.
+
+To run the tests:
+```bash
+npx jest
+```
+
+The test suite includes cases for:
+- Valid data inputs.
+- Edge cases like zero revenue or liabilities.
+- Handling of negative values in the data.
+
+---
+
+## Project Structure
+
+```plaintext
+rewardpay-challenge/
+├── data.json                     # Input data file
+├── SourceCode/
+│   ├── main.js                   # Entry point for the application
+│   ├── metricFunctions.js        # Functions to read data and calculate metrics
+├── test/
+│   ├── metricFunctions.test.js   # Unit tests for the metrics calculations
+├── package.json                  # Project metadata and dependencies
+├── README.md                     # Project documentation
+```
+
+---
+
+## Dependencies
+
+The following npm packages are required for this project:
+- **`fs`**: Built-in Node.js module for file system operations.
+- **`jest`**: Testing framework for JavaScript. (Installed via `npm`)
+
+To install dependencies:
+```bash
+npm install
+```
+
+---
+
+## Development Notes
+
+1. **Error Handling**: 
+   - If the data file is missing or contains invalid fields, the application will log an appropriate error message.
+   - Ensure the input JSON adheres to the expected format.
+
+2. **Formatting**:
+   - Monetary values are formatted using `toLocaleString`.
+   - Percentages are rounded to one decimal place and prefixed with `%`.
+
+---
