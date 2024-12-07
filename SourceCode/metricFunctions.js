@@ -32,11 +32,6 @@ function metricsCalculations(fileData) {
             grossProfit += rowData.total_value;
         }
 
-        // Net Profit Margin Calculation
-        if (rowData.account_type === "sales" && rowData.value_type === "debit") {
-            grossProfit += rowData.total_value;
-        }
-
         // Working Capital Ratio Calculation
         // Assets Calculation
         if (rowData.account_category === "assets" && (rowData.account_type === "current" || rowData.account_type === "bank" || rowData.account_type === "current_accounts_receivable")) {
