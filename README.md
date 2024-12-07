@@ -1,7 +1,3 @@
-Here's a comprehensive `README.md` file for your project: 
-
----
-
 # RewardPay Accounting Metrics Challenge
 
 This repository contains the solution to the RewardPay coding challenge. The challenge involves developing an application that calculates key accounting metrics from a given JSON data file and outputs them in a specific format.
