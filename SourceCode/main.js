@@ -1,7 +1,9 @@
 const {readFileDir, metricsCalculations} = require("./metricFunctions");
 
 try {
-    const data = readFileDir("../data.json");
+    // Use command-line argument or default to "../data.json"
+    const filePath = process.argv[2] || "../data.json";
+    const data = readFileDir(filePath);
     const output = metricsCalculations(data);
 
     console.log(`Revenue: $${Math.round(output.revenue).toLocaleString()}`);

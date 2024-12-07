@@ -1,7 +1,6 @@
 const { readFileDir, metricsCalculations } = require("../SourceCode/metricFunctions");
 const fs = require("fs");
 
-// Mock data for testing
 describe("metricsCalculations", () => {
     test("should calculate all metrics correctly for valid data", () => {
         // Mock data
@@ -17,10 +16,8 @@ describe("metricsCalculations", () => {
             ]
         };
 
-        // Call the function
         const result = metricsCalculations(mockData);
 
-        // Check results
         expect(result.revenue).toBe(2000);
         expect(result.expenses).toBe(1000);
         expect(result.grossProfitMargin).toBeCloseTo(75.0, 1);
@@ -37,10 +34,8 @@ describe("metricsCalculations", () => {
             ]
         };
 
-        // Call the function
         const result = metricsCalculations(mockData);
 
-        // Check results
         expect(result.revenue).toBe(0);
         expect(result.expenses).toBe(500);
         expect(result.grossProfitMargin).toBe(0);
@@ -57,11 +52,9 @@ describe("metricsCalculations", () => {
             ]
         };
 
-        // Call the function
         const result = metricsCalculations(mockData);
 
-        // Check results
-        expect(result.workingCapitalRatio).toBe(0); // No liabilities
+        expect(result.workingCapitalRatio).toBe(0);
     });
 
     test("should handle negative values correctly in the data", () => {
@@ -78,15 +71,13 @@ describe("metricsCalculations", () => {
             ]
         };
     
-        // Call the function
         const result = metricsCalculations(mockData);
-    
-        // Check results
+ 
         expect(result.revenue).toBe(5000);
-        expect(result.expenses).toBe(-1500); // Negative value should be included
-        expect(result.grossProfitMargin).toBeCloseTo(80.0, 1); // 4000 / 5000 * 100
-        expect(result.netProfitMargin).toBeCloseTo(130.0, 1); // (5000 - (-1500)) / 5000 * 100
-        expect(result.workingCapitalRatio).toBeCloseTo(187.5, 1); // (2000 - 500) / (1000 - 200) * 100
+        expect(result.expenses).toBe(-1500);
+        expect(result.grossProfitMargin).toBeCloseTo(80.0, 1);
+        expect(result.netProfitMargin).toBeCloseTo(130.0, 1);
+        expect(result.workingCapitalRatio).toBeCloseTo(187.5, 1);
     });
 });
 
